@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>Lattice Vault</title>
+<style>
+body{font-family:system-ui,sans-serif;margin:2rem;color:#222;max-width:1200px}
+h1{font-size:1.4rem}.bar{display:flex;gap:.6rem;align-items:center;margin-bottom:1rem;flex-wrap:wrap}
+table{border-collapse:collapse;width:100%;font-size:.9rem}th,td{border-bottom:1px solid #ddd;padding:.4rem;text-align:left;vertical-align:top}
+th{background:#f4f4f4}.st{padding:.1rem .4rem;border-radius:4px;font-size:.8rem}
+.proposed{background:#fff3cd}.active{background:#d1e7dd}.rejected{background:#f8d7da}.reverted{background:#e2e3e5}
+.note{color:#666;font-size:.85rem}code{font-size:.8rem}mark{background:#ffe58f}
+</style></head><body>
+<h1>Lattice Vault <span class="note">(read-only prototype)</span></h1>
+<div class="bar">
+ <label>Status <select id="status"><option value="">all</option><option>proposed</option><option>active</option><option>rejected</option><option>reverted</option></select></label>
+ <label>Trust <select id="trust"><option value="">all</option><option>verified</option><option>agent</option><option>unverified</option></select></label>
+ <input id="q" type="search" placeholder="Search (FTS, Turkish-aware)…"><button id="go">Search</button><button id="clear">Clear</button>
+ <span id="info" class="note"></span>
+</div>
+<p class="note">Approve/reject is human-only and not available in this UI yet (planned for step 2). Use the CLI: <code>vault review &lt;id&gt;</code>.</p>
+<table><thead><tr><th>Time</th><th>Type</th><th>Subject</th><th>Actor</th><th>Status</th><th>Trust</th><th>Text</th><th></th></tr></thead>
+<tbody id="rows"></tbody></table>
+<div class="bar"><button id="prev">← Prev</button><button id="next">Next →</button></div>
+<script src="/app.js"></script>
+</body></html>
