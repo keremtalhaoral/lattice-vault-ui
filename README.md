@@ -1,11 +1,20 @@
 # Lattice Vault UI (prototype, step 1)
 
 Local, read-only web UI for a Lattice Vault SQLite DB. Python stdlib only (http.server + sqlite3), no build step.
-Reuses `vault.py` from `../lattice-vault-release` (override with `VAULT_SRC=/path/to/release`).
+Reuses `vault.py` from a sibling `lattice-vault` (or `lattice-vault-release`) checkout; override with `VAULT_SRC`.
+
+## Clone (on your machine)
+```sh
+git clone https://github.com/keremtalhaoral/lattice-vault.git
+git clone https://github.com/keremtalhaoral/lattice-vault-ui.git
+# folders must be siblings: lattice-vault/ and lattice-vault-ui/
+```
+
+`server.py` imports `vault.py` from `../lattice-vault` or `../lattice-vault-release` by default (override with `VAULT_SRC=/path/to/vault`).
 
 ## Run
 ```sh
-python3 ../lattice-vault-release/examples/seed.py demo        # synthetic demo DB -> demo/vault.db
+python3 ../lattice-vault/examples/seed.py demo                # synthetic demo DB -> demo/vault.db
 VAULT_DB=demo/vault.db python3 server.py                      # or: python3 server.py --db demo/vault.db [--port 8765]
 # open http://127.0.0.1:8765/
 python3 -m unittest test_api                                  # tests (seed a temp DB)

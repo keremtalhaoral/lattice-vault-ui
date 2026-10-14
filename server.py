@@ -9,7 +9,15 @@ from http.server import ThreadingHTTPServer, BaseHTTPRequestHandler
 from urllib.parse import urlparse, parse_qs, quote
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-VAULT_SRC = os.environ.get("VAULT_SRC", os.path.join(os.path.dirname(HERE), "lattice-vault-release"))
+_parent = os.path.dirname(HERE)
+_default_src = next(
+    (p for p in (
+        os.path.join(_parent, "lattice-vault"),
+        os.path.join(_parent, "lattice-vault-release"),
+    ) if os.path.isfile(os.path.join(p, "vault.py"))),
+    os.path.join(_parent, "lattice-vault"),
+)
+VAULT_SRC = os.environ.get("VAULT_SRC", _default_src)
 sys.path.insert(0, VAULT_SRC)
 import vault  # noqa: E402  (reused: search(), tr_norm via search)
 
